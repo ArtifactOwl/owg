@@ -1,3 +1,4 @@
+
 use std::{net::SocketAddr, sync::Arc, time::Duration};
 
 use anyhow::Result;
@@ -41,7 +42,7 @@ async fn main() -> Result<()> {
     // Axum 0.7: use TcpListener + axum::serve
     let addr: SocketAddr = "0.0.0.0:8080".parse()?;
     let listener = TcpListener::bind(addr).await?;
-    info!("owg-server listening on {}", addr);
+    info!(%addr, "owg-server listening");
     axum::serve(listener, app).await?;
     Ok(())
 }
@@ -104,6 +105,7 @@ async fn handle_socket(state: AppState, socket: WebSocket) {
         if let Message::Text(txt) = msg {
             match serde_json::from_str::<Envelope<Cmd>>(&txt) {
                 Ok(env) => {
+                    info!("received Cmd at t={} (kind=cmd)", env.t);
                     let events = {
                         let mut sim = state.sim.lock().await;
                         sim.apply(env.body)
@@ -119,6 +121,7 @@ async fn handle_socket(state: AppState, socket: WebSocket) {
                         };
                         if let Ok(json) = serde_json::to_string(&env_evt) {
                             let _ = state.tx.send(json);
+                            info!("broadcast event at t={}", t);
                         }
                     }
                 }
