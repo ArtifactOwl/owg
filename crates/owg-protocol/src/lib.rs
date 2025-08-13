@@ -3,9 +3,7 @@ use uuid::Uuid;
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct SchemaVersion { pub major: u16, pub minor: u16 }
-impl SchemaVersion {
-    pub const V0_1: SchemaVersion = SchemaVersion{ major:0, minor:1 };
-}
+impl SchemaVersion { pub const V0_1: SchemaVersion = SchemaVersion{ major:0, minor:1 }; }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Envelope<T> {

@@ -1,10 +1,8 @@
 use blake3::Hasher;
 use serde::Serialize;
 
-/// Fixed step in seconds (example 60Hz).
 pub const DT: f32 = 1.0 / 60.0;
 
-/// Hash any serializable struct into a canonical blake3 hex string.
 pub fn hash_state<T: Serialize>(state: &T) -> String {
     let json = serde_json::to_string(state).expect("serialize");
     let mut hasher = Hasher::new();
@@ -12,7 +10,6 @@ pub fn hash_state<T: Serialize>(state: &T) -> String {
     hasher.finalize().to_hex().to_string()
 }
 
-/// Deterministic RNG facade (very light pseudo-rng; swap to Xoshiro/ChaCha as needed).
 #[derive(Clone)]
 pub struct Rng { state: u64 }
 impl Rng {

@@ -1,7 +1,7 @@
 use anyhow::Result;
 use owg_core::{DT, hash_state};
 use owg_physics::Integrator;
-use owg_protocol::{Cmd, Evt, State, Envelope, Kind, SchemaVersion};
+use owg_protocol::{Cmd, Evt, Envelope, Kind, SchemaVersion};
 
 pub struct Sim {
     integ: Integrator,
@@ -26,7 +26,6 @@ impl Sim {
     }
 
     pub fn step(&mut self) {
-        // Example: integrate all entity poses naively
         for e in &mut self.state.entities {
             let (np, nv) = self.integ.step(e.pose.p, e.pose.v, DT);
             e.pose.p = np;
@@ -53,7 +52,6 @@ impl Sim {
 pub fn run_headless_example() -> Result<()> {
     let mut sim = Sim::new("W-2025-08-A");
     for _ in 0..3 { sim.step(); }
-    let snap = sim.snapshot_envelope();
-    println!("Snapshot@{} hash={}", snap.t, hash_state(&sim.state));
+    println!("Snapshot@{} hash={}", sim.tick, hash_state(&sim.state));
     Ok(())
 }
