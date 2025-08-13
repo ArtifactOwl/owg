@@ -1,0 +1,11 @@
+[package]
+name = "owg-sim"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+owg-core = { path = "../owg-core" }
+owg-physics = { path = "../owg-physics" }
+owg-protocol = { path = "../owg-protocol" }
+serde = { workspace = true }
+anyhow = { workspace = true }

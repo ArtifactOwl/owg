@@ -1,0 +1,8 @@
+[package]
+name = "owg-server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+owg-sim = { path = "../owg-sim" }
+anyhow = { workspace = true }

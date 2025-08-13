@@ -1,0 +1,8 @@
+- id: ingot-fe
+  inputs:  { FeOre: 10 }
+  outputs: { FeIngot: 1 }
+  time: 2.0
+- id: alloy-fe-pb
+  inputs:  { FeIngot: 2, PbIngot: 1 }
+  outputs: { FePbAlloy: 1 }
+  time: 4.0

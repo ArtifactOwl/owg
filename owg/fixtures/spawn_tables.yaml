@@ -1,0 +1,8 @@
+- region: r0
+  spawns:
+    - kind: asteroid_small
+      prob: 0.6
+    - kind: asteroid_medium
+      prob: 0.3
+    - kind: station_mining
+      prob: 0.1

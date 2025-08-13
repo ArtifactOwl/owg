@@ -1,0 +1,38 @@
+{
+  "world": {
+    "seed": "W-2025-08-A",
+    "time": 0
+  },
+  "entities": [
+    {
+      "id": "e1",
+      "archetype": "ship/player",
+      "pose": {
+        "p": [
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0
+        ],
+        "\u03b8": 0,
+        "\u03c9": 0
+      },
+      "physics": {
+        "mass": 1200,
+        "radius": 1.2
+      },
+      "inventory": {
+        "slots": [
+          [
+            "FeOre",
+            10
+          ]
+        ]
+      },
+      "owner": "player-uuid"
+    }
+  ],
+  "projectiles": []
+}

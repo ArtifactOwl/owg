@@ -1,0 +1,3 @@
+{"t":0, "cmd":{"Ping":{"nonce":"abc"}}}
+{"t":1, "cmd":{"Move":{"entityId":"e1","axis":[1,0],"thrust":0.4}}}
+{"t":5, "cmd":{"Mine":{"entityId":"e1","target":"asteroid-42"}}}
