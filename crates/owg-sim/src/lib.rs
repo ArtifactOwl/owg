@@ -37,6 +37,7 @@ impl Sim {
     }
 
     pub fn state_hash(&self) -> String { hash_state(&self.state) }
+    pub fn tick(&self) -> u64 { self.tick }
 
     pub fn snapshot_envelope(&self) -> Envelope<Evt> {
         Envelope {

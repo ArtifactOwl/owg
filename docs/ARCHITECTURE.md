@@ -8,9 +8,9 @@ owg/
     owg-physics    # pure deterministic physics
     owg-sim        # ECS gameplay systems; command->event API
     owg-persistence# snapshots, deltas, migrations
-    owg-server     # IO shell, tick loop, replay capture
+    owg-server     # IO shell, tick loop, replay capture, WebSocket
   clients/
-    web-client/    # thin web client skeleton
+    web-client/    # thin browser client for WS testing
   fixtures/        # sample content and tiny test worlds
   tests/           # protocol & determinism tests
   ci/              # CI workflows

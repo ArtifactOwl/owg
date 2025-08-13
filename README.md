@@ -1,18 +1,20 @@
-# OWG Monorepo (Sprint A skeleton)
+# OWG Monorepo (Sprint A + WS)
 
-This is a minimal, compiling-ready scaffold for the Open-World Game (OWG).
-It sets up clear module boundaries, a versioned protocol, determinism hooks,
-and CI stubs to run tests across platforms.
+This scaffold includes:
+- Clear module boundaries (protocol/core/physics/sim/persistence/server)
+- Determinism hooks (stable hashing) & tests
+- Minimal **WebSocket server** (axum) that streams `Snapshot` every 100ms and handles `Ping`→`Pong`
+- Tiny browser client to test WS
 
 ## Quick start
 
 ```bash
-# From repo root
 cargo build
 cargo test
-
-# Run server stub
 cargo run -p owg-server
 ```
 
-See `docs/` for architecture, determinism strategy, and protocol examples.
+Then open `clients/web-client/index.html` in your browser and click **Connect**.
+You'll see periodic `Snapshot` events; click **Send Ping** to receive a `Pong`.
+
+See `docs/` for architecture and determinism notes.
