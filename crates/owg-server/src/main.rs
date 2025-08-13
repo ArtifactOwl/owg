@@ -89,7 +89,7 @@ async fn handle_socket(state: AppState, socket: WebSocket) {
         }
     }
 
-    // Broadcast snapshots to this client (move the sink into task; SplitSink isn't Clone)
+    // Broadcast snapshots to this client (sink isn't Clone → move it into task)
     let mut rx = state.tx.subscribe();
     tokio::spawn(async move {
         while let Ok(text) = rx.recv().await {

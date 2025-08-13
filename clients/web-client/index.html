@@ -51,7 +51,7 @@
     document.getElementById('ping').onclick = () => {
       if (!ws || ws.readyState !== WebSocket.OPEN) return log('not connected');
       const env = {
-        kind: "Cmd",
+        kind: "cmd",
         schema: {major:0, minor:1},
         t: 0,
         id: null,

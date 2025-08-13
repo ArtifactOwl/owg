@@ -6,6 +6,14 @@ pub struct SchemaVersion { pub major: u16, pub minor: u16 }
 impl SchemaVersion { pub const V0_1: SchemaVersion = SchemaVersion{ major:0, minor:1 }; }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum Kind {
+    #[serde(rename = "cmd", alias = "Cmd")]
+    Cmd,
+    #[serde(rename = "evt", alias = "Evt")]
+    Evt,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Envelope<T> {
     pub kind: Kind,
     pub schema: SchemaVersion,
@@ -13,10 +21,6 @@ pub struct Envelope<T> {
     pub id: Option<Uuid>,
     pub body: T,
 }
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all="camelCase")]
-pub enum Kind { Cmd, Evt }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag="type")]
