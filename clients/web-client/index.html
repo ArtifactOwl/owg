@@ -10,18 +10,24 @@
     button { margin-right: 0.5rem; }
     .row { margin: 0.25rem 0; }
     code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    input[type=text] { width: 340px; }
   </style>
 </head>
 <body>
   <h1>OWG WebSocket test</h1>
   <div class="row">
     <label>WS URL:</label>
-    <input id="url" value="ws://localhost:8080/ws" size="40"/>
+    <input id="url" value="ws://localhost:8080/ws"/>
     <button id="connect">Connect</button>
     <button id="disconnect">Disconnect</button>
   </div>
   <div class="row">
-    <button id="ping">Send Ping</button>
+    <button id="ping">Ping</button>
+    <button id="fire">Fire</button>
+    <button id="mine">Mine</button>
+    <label>EntityId:</label><input id="eid" value="e1" />
+  </div>
+  <div class="row">
     <button id="clear">Clear Log</button>
   </div>
   <pre id="log"></pre>
@@ -32,6 +38,13 @@
       const t = new Date().toISOString().split('T')[1].replace('Z','');
       logEl.textContent += `[${t}] ${msg}\n`;
       logEl.scrollTop = logEl.scrollHeight;
+    }
+    function send(body) {
+      if (!ws || ws.readyState !== WebSocket.OPEN) return log('not connected');
+      const env = { kind: "cmd", schema: {major:0,minor:1}, t: 0, id: null, body };
+      const payload = JSON.stringify(env);
+      ws.send(payload);
+      log('sent: ' + payload);
     }
     document.getElementById('connect').onclick = () => {
       const u = document.getElementById('url').value;
@@ -49,20 +62,19 @@
       };
     };
     document.getElementById('disconnect').onclick = () => { if (ws) ws.close(); };
+
     document.getElementById('ping').onclick = () => {
-      if (!ws || ws.readyState !== WebSocket.OPEN) return log('not connected');
-      const env = {
-        kind: "cmd",
-        schema: {major:0, minor:1},
-        t: 0,
-        id: null,
-        body: { "type": "Ping", "nonce": Math.random().toString(36).slice(2) } // <-- serde tag
-      };
-      const payload = JSON.stringify(env);
-      ws.send(payload);
-      log('sent: ' + payload);
+      send({ "type": "Ping", "nonce": Math.random().toString(36).slice(2) });
     };
-    document.getElementById('clear').onclick = () => { logEl.textContent = ''; };
+    document.getElementById('fire').onclick = () => {
+      const id = document.getElementById('eid').value;
+      send({ "type": "Fire", "entity_id": id, "weapon": "railgun", "aim": [1,0] });
+    };
+    document.getElementById('mine').onclick = () => {
+      const id = document.getElementById('eid').value;
+      send({ "type": "Mine", "entity_id": id, "target": "asteroid-42" });
+    };
+    document.getElementById('clear').onclick = () => { logEl.textContent=''; };
   </script>
 </body>
 </html>

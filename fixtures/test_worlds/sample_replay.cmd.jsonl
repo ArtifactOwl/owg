@@ -1,3 +1,4 @@
-{"t":0, "cmd":{"Ping":{"nonce":"abc"}}}
-{"t":1, "cmd":{"Move":{"entity_id":"e1","axis":[1,0],"thrust":0.4}}}
-{"t":5, "cmd":{"Mine":{"entity_id":"e1","target":"asteroid-42"}}}
+
+{"t":0, "cmd":{"type":"Ping","nonce":"abc"}}
+{"t":2, "cmd":{"type":"Fire","entity_id":"e1","weapon":"railgun","aim":[1,0]}}
+{"t":15, "cmd":{"type":"Mine","entity_id":"e1","target":"asteroid-42"}}
