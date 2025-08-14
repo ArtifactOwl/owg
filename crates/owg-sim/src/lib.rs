@@ -116,6 +116,6 @@ impl Sim {
 pub fn run_headless_example() -> Result<()> {
     let mut sim = Sim::new("W-2025-08-A");
     for _ in 0..3 { sim.step(); }
-    println!("Snapshot@{} hash={}", sim.tick, hash_state(&sim.state));
+    println!("Snapshot@{} hash={}", sim.tick, hash_state(&self.state));
     Ok(())
 }
